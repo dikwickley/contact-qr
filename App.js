@@ -1,9 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { HomeScreen } from "./screens/HomeScreen";
 import { ScannerScreen } from "./screens/ScannerScreen";
+import { LoginScreen } from "./screens/LoginScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ export default function App() {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name={"home"} size={size} color={color} />
+              <AntDesign name={"home"} size={size} color={color} />
             ),
           }}
         />
@@ -25,7 +26,16 @@ export default function App() {
           component={ScannerScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name={"camera"} size={size} color={color} />
+              <AntDesign name={"camera"} size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={LoginScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name={"user"} size={size} color={color} />
             ),
           }}
         />
