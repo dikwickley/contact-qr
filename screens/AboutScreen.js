@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Pressable } from "react-native";
 import { auth, db } from "../firebase.config";
-import { collection, getDocs } from "firebase/firestore";
-export function HomeScreen({ navigation }) {
+
+export function AboutScreen() {
   const handleSignout = () => auth.signOut();
   const [user, setUser] = useState(null);
 
-  const fetchData = async () => {
-    // const querySnapshot = await getDocs(collection(db, "attendee"));
-    // querySnapshot.forEach((doc) => {
-    //   console.log(`${doc.id} => ${doc.data()}`);
-    // });
-  };
   useEffect(() => {
     console.log("auth", auth);
-    fetchData();
   }, []);
 
   return (
     <View style={styles.main}>
-      <Text>Home Screen</Text>
+      <Text>About Screen</Text>
     </View>
   );
 }

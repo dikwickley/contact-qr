@@ -10,6 +10,8 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { ScannerScreen } from "./screens/ScannerScreen";
 import { LoginScreen } from "./screens/LoginScreen";
 import { ProfileScreen } from "./screens/ProfileScreen";
+import { AboutScreen } from "./screens/AboutScreen";
+import { AttendeeScreen } from "./screens/AttendeeScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,9 +30,49 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <Stack.Navigator>
+        {/* {!user && (
+          <Stack.Group
+            screenOptions={{ presentation: "modal", headerShown: false }}
+          >
+            <Stack.Screen name="login" component={Login} />
+            <Stack.Screen name="register" component={Register} />
+          </Stack.Group>
+        )} */}
+
+        <Stack.Group>
+          <Stack.Screen
+            name="root"
+            component={BottomTabNavigator}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            options={{ presentation: "modal" }}
+            name="attendee"
+            component={AttendeeScreen}
+          />
+
+          {/* <Stack.Screen
+              options={{ headerShown: false, presentation: "modal" }}
+              name="question"
+              component={Question}
+            />
+            <Stack.Screen
+              options={{ headerShown: false, presentation: "modal" }}
+              name="result"
+              component={Result}
+            /> */}
+        </Stack.Group>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+
+  return (
+    <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
           tabBarActiveTintColor: "#FFABAB",
           tabBarInactiveTintColor: "gray",
         }}
@@ -57,7 +99,18 @@ export default function App() {
           }}
         />
 
-        {!user && (
+        <Tab.Screen
+          name="About"
+          component={AboutScreen}
+          options={{
+            tabBarShowLabel: false,
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="info" color={color} size={40} />
+            ),
+          }}
+        />
+
+        {/* {!user && (
           <Tab.Screen
             name="login"
             component={LoginScreen}
@@ -80,17 +133,47 @@ export default function App() {
               ),
             }}
           />
-        )}
+        )} */}
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const BottomTabNavigator = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="home"
+        component={HomeScreen}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="home" color={color} size={40} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="scanner"
+        component={ScannerScreen}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="camera" color={color} size={40} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="About"
+        component={AboutScreen}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="info" color={color} size={40} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};

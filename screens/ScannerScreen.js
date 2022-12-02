@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { PrimaryButton } from "../components/Buttons";
 
-export function ScannerScreen() {
+export function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const getBarCodeScannerPermissions = async () => {
@@ -14,7 +15,10 @@ export function ScannerScreen() {
   }, []);
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    navigation.navigate("attendee", {
+      attendeeId: data,
+    });
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {
@@ -24,7 +28,7 @@ export function ScannerScreen() {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={styles.container}>
+    <View style={styles.main}>
       {!scanned && (
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -33,16 +37,19 @@ export function ScannerScreen() {
       )}
 
       {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+        <PrimaryButton text={"Tap to Scan"} onPress={() => setScanned(false)} />
       )}
     </View>
   );
 }
 const styles = StyleSheet.create({
-  container: {
+  main: {
+    display: "flex",
     flex: 1,
-    backgroundColor: "#fff",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "white",
+    padding: 50,
   },
 });

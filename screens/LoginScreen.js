@@ -39,7 +39,7 @@ export function LoginScreen({ navigation }) {
   ) : (
     <View style={styles.main}>
       <View style={styles.form}>
-        <Text style={styles.title}>login</Text>
+        {/* <Text style={styles.title}>login</Text> */}
         <TextInput
           style={styles.input}
           placeholder="email"
@@ -55,7 +55,7 @@ export function LoginScreen({ navigation }) {
         />
 
         <Pressable style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>login</Text>
+          <Text style={styles.buttonText}>signin</Text>
         </Pressable>
       </View>
     </View>
