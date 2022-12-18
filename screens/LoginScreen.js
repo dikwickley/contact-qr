@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { auth } from "./../firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { PrimaryButton } from "../components/Buttons";
 export function LoginScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -55,9 +55,11 @@ export function LoginScreen({ navigation }) {
           onChangeText={(text) => setPassword(text)}
         />
 
-        <Pressable style={styles.button} onPress={handleLogin}>
+        {/* <Pressable style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>signin</Text>
-        </Pressable>
+          
+        </Pressable> */}
+        <PrimaryButton text={"Login"} onPress={handleLogin} />
       </View>
     </View>
   );

@@ -46,6 +46,7 @@ export function AttendeeScreen({ route, navigation }) {
     };
     const contactId = await Contacts.addContactAsync(contact);
     console.log({ contactId });
+    alert("contact saved");
   };
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export function AttendeeScreen({ route, navigation }) {
   }, []);
 
   return (
-    <View style={{ width: "100%", height: "100%" }}>
+    <View style={styles.container}>
       <Image
         resizeMode="cover"
         source={require("../assets/main-bg-img.png")}
@@ -80,19 +81,27 @@ export function AttendeeScreen({ route, navigation }) {
             Mobile Number:{" "}
             <Text style={styles.infotext}>{data?.mobileNumber}</Text>
           </Text>
-          <View style={{ marginTop: 150, alignSelf: "flex-end" }}>
+          {/* <View style={{ marginTop: 10, alignSelf: "flex-end" }}>
             <PrimaryButton
               text={"Save Contact"}
               fontSize={24}
               onPress={saveContact}
             />
-          </View>
+          </View> */}
         </View>
       )}
     </View>
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   main: {
     width: "100%",
     height: "100%",
@@ -120,7 +129,6 @@ const styles = StyleSheet.create({
     color: "black",
   },
   button: {
-    margin: 5,
     backgroundColor: "red",
   },
   background: {
