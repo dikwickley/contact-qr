@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, Pressable } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { db } from "../firebase.config";
 import { getDoc, doc } from "firebase/firestore";
 import { PrimaryButton } from "../components/Buttons";
@@ -55,7 +55,11 @@ export function AttendeeScreen({ route, navigation }) {
 
   return (
     <View style={{ width: "100%", height: "100%" }}>
-      {/* <Text>AttendeId: {attendeeId}</Text> */}
+      <Image
+        resizeMode="cover"
+        source={require("../assets/main-bg-img.png")}
+        style={styles.background}
+      />
       {data && (
         <View style={styles.main}>
           <Text style={styles.text}>{data.name}</Text>
@@ -90,7 +94,6 @@ export function AttendeeScreen({ route, navigation }) {
 }
 const styles = StyleSheet.create({
   main: {
-    // backgroundColor: "red",
     width: "100%",
     height: "100%",
     padding: 20,
@@ -119,5 +122,10 @@ const styles = StyleSheet.create({
   button: {
     margin: 5,
     backgroundColor: "red",
+  },
+  background: {
+    position: "absolute",
+    opacity: 1,
+    flex: -1,
   },
 });

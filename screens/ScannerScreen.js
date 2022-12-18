@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { PrimaryButton } from "../components/Buttons";
 
 export function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(true);
+  const [scanned, setScanned] = useState(false);
   const getBarCodeScannerPermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
     setHasPermission(status === "granted");
@@ -28,26 +28,48 @@ export function ScannerScreen({ navigation }) {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={styles.main}>
-      {!scanned && (
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
+    <View style={styles.container}>
+      {scanned && (
+        <Image
+          resizeMode="cover"
+          source={require("../assets/login-form-bg-img.png")}
+          style={styles.background}
         />
       )}
+      <View style={styles.main}>
+        {!scanned && (
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={StyleSheet.absoluteFillObject}
+          />
+        )}
 
-      {scanned && (
-        <PrimaryButton text={"Tap to Scan"} onPress={() => setScanned(false)} />
-      )}
+        {scanned && (
+          <PrimaryButton
+            text={"Tap to Scan"}
+            onPress={() => setScanned(false)}
+          />
+        )}
+      </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
   main: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     height: "100%",
     margin: 20,
+  },
+  background: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });

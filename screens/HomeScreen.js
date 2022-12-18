@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, Pressable } from "react-native";
+import { StyleSheet, Text, View, Button, Pressable, Image } from "react-native";
 import { auth, db } from "../firebase.config";
 import { collection, getDocs } from "firebase/firestore";
 export function HomeScreen({ navigation }) {
@@ -19,18 +19,33 @@ export function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.main}>
-      <Text>Home Screen</Text>
+      <Image
+        resizeMode="cover"
+        source={require("../assets/main-bg-img.png")}
+        style={styles.background}
+      />
+      <Text style={styles.heading}>Celebrating 75 Years Of Excellence</Text>
     </View>
   );
 }
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
+    display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     justifyContent: "center",
-    position: "relative",
-    backgroundColor: "white",
-    paddingTop: 50,
+    alignItems: "center",
+    height: "100%",
+    margin: 20,
+  },
+  background: {
+    position: "absolute",
+    opacity: 1,
+    flex: -1,
+  },
+  heading: {
+    fontSize: 50,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "white",
   },
 });

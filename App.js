@@ -71,7 +71,9 @@ export default function App() {
 
 const BottomTabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{ headerShown: false, tabBarActiveTintColor: "#FFABAB" }}
+    >
       <Tab.Screen
         name="home"
         component={HomeScreen}

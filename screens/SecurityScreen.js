@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, Pressable, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Pressable,
+  Alert,
+  Image,
+} from "react-native";
 import { auth, db } from "../firebase.config";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { SelectList } from "react-native-dropdown-select-list";
@@ -106,31 +114,38 @@ export function SecurityScreen({ navigation }) {
 
   return (
     <View style={styles.main}>
-      <SelectList
-        placeholder="Select day"
-        setSelected={(val) => setSelectedDate(val)}
-        data={days}
-        search={false}
-        save="key"
+      <Image
+        resizeMode="cover"
+        source={require("../assets/question-bg-img.png")}
+        style={styles.background}
       />
-      <View style={styles.scannerView}>
-        {!scanned && (
-          <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={StyleSheet.absoluteFillObject}
-          />
-        )}
+      <View style={styles.submain}>
+        <SelectList
+          placeholder="Select day"
+          setSelected={(val) => setSelectedDate(val)}
+          data={days}
+          search={false}
+          save="key"
+        />
+        <View style={styles.scannerView}>
+          {!scanned && (
+            <BarCodeScanner
+              onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+              style={StyleSheet.absoluteFillObject}
+            />
+          )}
 
-        {scanned && (
-          <PrimaryButton
-            text={"Tap to Scan"}
-            onPress={() => setScanned(false)}
-          />
+          {scanned && (
+            <PrimaryButton
+              text={"Tap to Scan"}
+              onPress={() => setScanned(false)}
+            />
+          )}
+        </View>
+        {!scanned && (
+          <PrimaryButton text={"Stop Scan"} onPress={() => setScanned(true)} />
         )}
       </View>
-      {!scanned && (
-        <PrimaryButton text={"Stop Scan"} onPress={() => setScanned(true)} />
-      )}
     </View>
   );
 }
@@ -140,10 +155,17 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     height: "100%",
+  },
+  submain: {
     margin: 20,
   },
+  background: {
+    position: "absolute",
+    top: 0,
+    width: "100%",
+    zIndex: -1,
+  },
   scannerView: {
-    // backgroundColor: "red",\
     marginVertical: 10,
     height: "75%",
     width: "100%",

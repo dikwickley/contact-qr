@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, Pressable } from "react-native";
+import { StyleSheet, Text, View, Button, Pressable, Image } from "react-native";
 import { auth, db } from "../firebase.config";
 import { PrimaryButton } from "../components/Buttons";
 import { getAuth, signOut } from "firebase/auth";
@@ -21,7 +21,12 @@ export function AboutScreen({ navigation }) {
 
   return (
     <View style={styles.main}>
-      <View>
+      <Image
+        resizeMode="cover"
+        source={require("../assets/login-form-bg-img.png")}
+        style={styles.background}
+      />
+      <View style={styles.buttonDiv}>
         <PrimaryButton
           text={"Security"}
           onPress={() => {
@@ -52,6 +57,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     height: "100%",
+  },
+  buttonDiv: {
     margin: 20,
+  },
+  background: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });
