@@ -79,9 +79,7 @@ export function SecurityScreen({ navigation }) {
 
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    navigation.navigate("attendee", {
-      attendeeId: data,
-    });
+
     console.log("attendeeID", data);
     console.log("date", selectedDate);
     if (selectedDate == "" || selectedDate == null) {

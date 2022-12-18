@@ -14,6 +14,7 @@ import { AboutScreen } from "./screens/AboutScreen";
 import { AttendeeScreen } from "./screens/AttendeeScreen";
 import { SecurityScreen } from "./screens/SecurityScreen";
 import { CatererScreen } from "./screens/CatererScreen";
+import { HistoryScreen } from "./screens/HistoryScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -92,6 +93,17 @@ const BottomTabNavigator = () => {
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="camera" color={color} size={40} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="history"
+        component={HistoryScreen}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="featured-play-list" color={color} size={40} />
           ),
         }}
       />
