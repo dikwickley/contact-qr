@@ -5,7 +5,7 @@ import { PrimaryButton } from "../components/Buttons";
 
 export function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
+  const [scanned, setScanned] = useState(true);
   const getBarCodeScannerPermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
     setHasPermission(status === "granted");
@@ -45,11 +45,9 @@ export function ScannerScreen({ navigation }) {
 const styles = StyleSheet.create({
   main: {
     display: "flex",
-    flex: 1,
     flexDirection: "column",
-    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
-    padding: 50,
+    height: "100%",
+    margin: 20,
   },
 });

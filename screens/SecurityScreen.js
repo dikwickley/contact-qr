@@ -11,10 +11,10 @@ export function SecurityScreen({ navigation }) {
   const handleSignout = () => auth.signOut();
   const [user, setUser] = useState(null);
   const [selectedDate, setSelectedDate] = React.useState("");
-  const data = [
-    { key: "1", value: "7thJanuary" },
-    { key: "2", value: "8thJanuary" },
-    { key: "3", value: "9thJanuary" },
+  const days = [
+    { key: "day1", value: "7th January" },
+    { key: "day2", value: "8th January" },
+    { key: "day3", value: "9th January" },
   ];
 
   useEffect(() => {
@@ -109,8 +109,9 @@ export function SecurityScreen({ navigation }) {
       <SelectList
         placeholder="Select day"
         setSelected={(val) => setSelectedDate(val)}
-        data={data}
-        save="value"
+        data={days}
+        search={false}
+        save="key"
       />
       <View style={styles.scannerView}>
         {!scanned && (
@@ -127,17 +128,24 @@ export function SecurityScreen({ navigation }) {
           />
         )}
       </View>
+      {!scanned && (
+        <PrimaryButton text={"Stop Scan"} onPress={() => setScanned(true)} />
+      )}
     </View>
   );
 }
 const styles = StyleSheet.create({
   main: {
-    padding: 10,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    height: "100%",
+    margin: 20,
   },
   scannerView: {
     // backgroundColor: "red",\
     marginVertical: 10,
-    height: "90%",
+    height: "75%",
     width: "100%",
   },
 });

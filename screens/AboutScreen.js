@@ -30,6 +30,13 @@ export function AboutScreen({ navigation }) {
         />
 
         <PrimaryButton
+          text={"Caterering"}
+          onPress={() => {
+            navigation.navigate("caterer");
+          }}
+        />
+
+        <PrimaryButton
           text={"Logout"}
           onPress={() => {
             handleSignout();
@@ -41,6 +48,10 @@ export function AboutScreen({ navigation }) {
 }
 const styles = StyleSheet.create({
   main: {
-    padding: 50,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    height: "100%",
+    margin: 20,
   },
 });
