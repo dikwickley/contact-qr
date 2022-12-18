@@ -25,6 +25,7 @@ export function LoginScreen({ navigation }) {
         const user = creds.user;
         console.log(user);
         setLoading(false);
+        navigation.navigate("about");
       })
       .catch((error) => {
         alert(error.message);

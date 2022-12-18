@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Pressable } from "react-native";
 import { db } from "../firebase.config";
 import { getDoc, doc } from "firebase/firestore";
 import { PrimaryButton } from "../components/Buttons";
+import * as Contacts from "expo-contacts";
 
 export function AttendeeScreen({ route, navigation }) {
   const { attendeeId } = route.params;
@@ -13,7 +14,7 @@ export function AttendeeScreen({ route, navigation }) {
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("data", docSnap.data());
+        // console.log("data", docSnap.data());
         setData(docSnap.data());
       } else {
         console.log("Document does not exist");
@@ -23,12 +24,33 @@ export function AttendeeScreen({ route, navigation }) {
     }
   };
 
-  const saveContact = () => {
+  const fetchContact = async () => {
+    const { status } = await Contacts.requestPermissionsAsync();
+
+    if (status === "granted") {
+      const { data } = await Contacts.getContactsAsync({
+        fields: [Contacts.Fields.Emails],
+      });
+      if (data.length > 0) {
+        const contact = data[0];
+        console.log(contact);
+      }
+    }
+  };
+
+  const saveContact = async () => {
     console.log("Contact Saved");
+    const contact = {
+      [Contacts.Fields.FirstName]: data.name,
+      [Contacts.Fields.PhoneNumbers]: data.mobileNumber,
+    };
+    const contactId = await Contacts.addContactAsync(contact);
+    console.log({ contactId });
   };
 
   useEffect(() => {
     fetchData();
+    fetchContact();
   }, []);
 
   return (

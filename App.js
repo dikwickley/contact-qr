@@ -12,6 +12,7 @@ import { LoginScreen } from "./screens/LoginScreen";
 import { ProfileScreen } from "./screens/ProfileScreen";
 import { AboutScreen } from "./screens/AboutScreen";
 import { AttendeeScreen } from "./screens/AttendeeScreen";
+import { SecurityScreen } from "./screens/SecurityScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -51,6 +52,18 @@ export default function App() {
             options={{ presentation: "modal" }}
             name="attendee"
             component={AttendeeScreen}
+          />
+
+          <Stack.Screen
+            options={{ presentation: "modal" }}
+            name="security"
+            component={SecurityScreen}
+          />
+
+          <Stack.Screen
+            options={{ presentation: "modal" }}
+            name="login"
+            component={LoginScreen}
           />
 
           {/* <Stack.Screen
@@ -165,7 +178,7 @@ const BottomTabNavigator = () => {
       />
 
       <Tab.Screen
-        name="About"
+        name="about"
         component={AboutScreen}
         options={{
           tabBarShowLabel: false,
