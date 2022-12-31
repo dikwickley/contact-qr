@@ -2,10 +2,30 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { PrimaryButton } from "../components/Buttons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+
+  const storeData = async (attendeeId) => {
+    try {
+      const myArray = await AsyncStorage.getItem("@history");
+
+      let scannedIds = [attendeeId];
+      if (myArray !== null) {
+        scannedIds = await JSON.parse(myArray);
+        scannedIds.push(attendeeId);
+      }
+      console.log({ scannedIds });
+      let unique = [...new Set(scannedIds)];
+      console.log({ unique });
+      await AsyncStorage.setItem("@history", JSON.stringify(unique));
+    } catch (error) {
+      console.log(error, "Error saving data");
+    }
+  };
+
   const getBarCodeScannerPermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
     setHasPermission(status === "granted");
@@ -15,6 +35,8 @@ export function ScannerScreen({ navigation }) {
   }, []);
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+    storeData(data);
+
     navigation.navigate("attendee", {
       attendeeId: data,
     });

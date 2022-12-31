@@ -10,12 +10,72 @@ import {
 } from "react-native";
 import { PrimaryButton } from "../components/Buttons";
 import { ContactCard } from "../components/Card";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { db } from "../firebase.config";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { useFocusEffect } from "@react-navigation/native";
 
 export function HistoryScreen({ navigation }) {
-  useEffect(() => {}, []);
+  const [attendeeHistory, setAttendeeHistory] = useState(null);
+  const [attendeeData, setAttendeeData] = useState([]);
+  const fetchLocalData = async () => {
+    try {
+      const myArray = await AsyncStorage.getItem("@history");
+      if (myArray !== null) {
+        // We have data!!
+        setAttendeeHistory(JSON.parse(myArray));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
-  const handleClearHistory = () => {
+  const fetchFirebaseData = async () => {
+    if (attendeeHistory) {
+      console.log("firebase", { attendeeHistory });
+      const q = query(
+        collection(db, "Alumni"),
+        where("__name__", "in", attendeeHistory)
+      );
+      const querySnapshot = await getDocs(q);
+      let _a = [];
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        try {
+          console.log(doc.id, " => ", doc.data());
+          let { name, branch, graduationYear } = doc.data();
+
+          _a.push({ name, branch, graduationYear, _id: doc.id });
+          console.log({ _a });
+        } catch (error) {
+          console.log(doc.id, " => error");
+        }
+      });
+      setAttendeeData(_a);
+    }
+  };
+  useEffect(() => {
+    fetchFirebaseData();
+  }, [attendeeHistory]);
+
+  useEffect(() => {
+    fetchLocalData();
+  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchLocalData();
+    }, [])
+  );
+
+  useEffect(() => {
+    console.log({ attendeeData });
+  }, [attendeeData]);
+
+  const handleClearHistory = async () => {
     alert("Confirm Clear History?");
+    await AsyncStorage.clear();
+    fetchLocalData();
   };
 
   return (
@@ -28,15 +88,21 @@ export function HistoryScreen({ navigation }) {
       <View style={styles.main}>
         <Text style={styles.heading}>History</Text>
         <ScrollView style={styles.cardContainer}>
-          <ContactCard
-            attendeeId={"1234"}
-            name={"aniket"}
-            department={"IT"}
-            year={2023}
-            navigation={navigation}
-          />
+          {attendeeData.length !== 0 &&
+            attendeeData.map((item, index) => {
+              return (
+                <ContactCard
+                  key={index}
+                  attendeeId={item._id}
+                  name={item.name}
+                  department={item.branch}
+                  year={item.graduationYear}
+                  navigation={navigation}
+                />
+              );
+            })}
         </ScrollView>
-        <PrimaryButton text={"Clear History"} onPress={handleClearHistory} />
+        {/* <PrimaryButton text={"Clear History"} onPress={handleClearHistory} /> */}
       </View>
     </View>
   );

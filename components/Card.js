@@ -7,7 +7,7 @@ const ContactCard = ({ attendeeId, name, department, year, navigation }) => {
       style={styles.card}
       onPress={() => {
         navigation.navigate("attendee", {
-          attendeeId: "rT9YW9eXZCiX8n797KaV",
+          attendeeId: attendeeId,
         });
       }}
     >
