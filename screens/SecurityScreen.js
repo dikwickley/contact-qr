@@ -47,7 +47,7 @@ export function SecurityScreen({ navigation }) {
   }, []);
 
   const checkEntry = async (attendeeId, date) => {
-    const docRef = await doc(db, "attendee", attendeeId);
+    const docRef = await doc(db, "Alumni", attendeeId);
     console.log({ docRef });
     try {
       const docSnap = await getDoc(docRef);
@@ -65,7 +65,7 @@ export function SecurityScreen({ navigation }) {
   };
 
   const markEntry = async (attendeeId, date) => {
-    const docRef = await doc(db, "attendee", attendeeId);
+    const docRef = await doc(db, "Alumni", attendeeId);
     try {
       let res = await updateDoc(docRef, {
         [`security.${date}`]: auth.currentUser.email,

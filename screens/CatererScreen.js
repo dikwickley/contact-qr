@@ -54,7 +54,7 @@ export function CatererScreen({ navigation }) {
   }, []);
 
   const checkEntry = async (attendeeId, date) => {
-    const docRef = await doc(db, "attendee", attendeeId);
+    const docRef = await doc(db, "Alumni", attendeeId);
     console.log({ docRef });
     try {
       const docSnap = await getDoc(docRef);
@@ -72,7 +72,7 @@ export function CatererScreen({ navigation }) {
   };
 
   const markEntry = async (attendeeId, date, meal) => {
-    const docRef = await doc(db, "attendee", attendeeId);
+    const docRef = await doc(db, "Alumni", attendeeId);
     try {
       let res = await updateDoc(docRef, {
         [`caterering.${date}.${meal}`]: auth.currentUser.email,

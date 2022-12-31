@@ -9,20 +9,29 @@ import { getAuth, RecaptchaVerifier } from "firebase/auth";
 // import {...} from "firebase/storage";
 
 // Initialize Firebase
+// const firebaseConfig = {
+//   // apiKey: "AIzaSyDwzY9Kv31HPX7I7bofUu_TwGAbDTVQGSU",
+//   // authDomain: "quizapp-3caa2.firebaseapp.com",
+//   // projectId: "quizapp-3caa2",
+//   // storageBucket: "quizapp-3caa2.appspot.com",
+//   // messagingSenderId: "905898688557",
+//   // appId: "1:905898688557:web:9d2da5546c69335333b8a4",
+//   //contact-qr app
+//   apiKey: "AIzaSyDhSZGg9hZQxgy5TKUC7LvCj3lcu0VvKNM",
+//   authDomain: "contact-qr.firebaseapp.com",
+//   projectId: "contact-qr",
+//   storageBucket: "contact-qr.appspot.com",
+//   messagingSenderId: "47440429263",
+//   appId: "1:47440429263:web:c9e01c004689829aa4f7ba",
+// };
+
 const firebaseConfig = {
-  // apiKey: "AIzaSyDwzY9Kv31HPX7I7bofUu_TwGAbDTVQGSU",
-  // authDomain: "quizapp-3caa2.firebaseapp.com",
-  // projectId: "quizapp-3caa2",
-  // storageBucket: "quizapp-3caa2.appspot.com",
-  // messagingSenderId: "905898688557",
-  // appId: "1:905898688557:web:9d2da5546c69335333b8a4",
-  //contact-qr app
-  apiKey: "AIzaSyDhSZGg9hZQxgy5TKUC7LvCj3lcu0VvKNM",
-  authDomain: "contact-qr.firebaseapp.com",
-  projectId: "contact-qr",
-  storageBucket: "contact-qr.appspot.com",
-  messagingSenderId: "47440429263",
-  appId: "1:47440429263:web:c9e01c004689829aa4f7ba",
+  apiKey: "AIzaSyAVDdmKWcaC9p0fEWD65cgxPIxchL1-0YU",
+  authDomain: "bvmpjc-58b2c.firebaseapp.com",
+  projectId: "bvmpjc-58b2c",
+  storageBucket: "bvmpjc-58b2c.appspot.com",
+  messagingSenderId: "709595368311",
+  appId: "1:709595368311:web:7f2d2c6f7a43d520bd2f72",
 };
 
 const app = initializeApp(firebaseConfig);

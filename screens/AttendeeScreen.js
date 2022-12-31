@@ -10,7 +10,7 @@ export function AttendeeScreen({ route, navigation }) {
   const [data, setData] = useState(null);
 
   const fetchData = async () => {
-    const docRef = doc(db, "attendee", attendeeId);
+    const docRef = doc(db, "Alumni", attendeeId);
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {

@@ -1,0 +1,33 @@
+{
+    "attendee": {
+        "branch": "IT",
+        "city": "Vadodara",
+        "email": "sprx077@gmail.com",
+        "graduationYear": 2023,
+        "lmNumber": "",
+        "mobileNumber": "9106400236",
+        "name": "Aniket Singh Rawat",
+        "security": {
+            "day1": "",
+            "day2": "",
+            "day3": ""
+        },
+        "caterering": {
+            "day1": {
+                "meal1": "",
+                "meal2": "",
+                "meal3": ""
+            },
+            "day2": {
+                "meal1": "",
+                "meal2": "",
+                "meal3": ""
+            },
+            "day3": {
+                "meal1": "",
+                "meal2": "",
+                "meal3": ""
+            }
+        }
+    }
+}
