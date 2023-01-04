@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "contactqr",
-    "slug": "contactQR",
+    "name": "BVM PJC",
+    "slug": "BVM PJC",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/bvmlogo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -18,11 +18,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.dikwickley.myapp"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.dikwickley.bvmpjc"
     },
     "android": {
-      "package": "com.dikwickley.myapp"
+      "package": "com.dikwickley.bvmpjc"
     },
     "web": {
       "favicon": "./assets/favicon.png"
