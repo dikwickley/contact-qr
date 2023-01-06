@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "BVM PJC",
-    "slug": "BVM PJC",
+    "slug": "BVMPJC",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/bvmlogo.png",
@@ -29,7 +29,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "19c7bc07-54d9-4073-8b4d-0d2e512bbf01"
+        "projectId": "00b168ae-6b38-4472-ac61-18f77ff905ec"
       }
     }
   }
